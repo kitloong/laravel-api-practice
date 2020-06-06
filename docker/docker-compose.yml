@@ -1,0 +1,41 @@
+version: '3'
+services:
+
+  # The Application
+  app:
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    working_dir: /var/www/code
+    volumes:
+      - ../:/var/www/code # Change to your path
+
+  # The Web Server
+  web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    working_dir: /var/www/code
+    volumes:
+      - ../:/var/www/code # Change to your path
+    ports:
+      - 8080:80
+
+  # The Database
+  database:
+    image: mysql:5.7
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    environment:
+      - "MYSQL_DATABASE=laravel"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD=secret"
+      - "MYSQL_ROOT_PASSWORD=secret"
+    ports:
+      - "33061:3306"
+
+  # Selenium
+  selenium:
+    image: selenium/standalone-chrome
+    ports:
+      - 4444:4444
