@@ -1,3 +1,7 @@
+# Article
+
+https://medium.com/@kitloong/create-crud-rest-api-with-laravel-api-resource-3146d91b38b6
+
 ## API Resource Routes
 
 https://laravel.com/docs/7.x/controllers#restful-partial-resource-routes
