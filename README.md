@@ -10,7 +10,7 @@ https://laravel.com/docs/7.x/eloquent-resources
 
 ### List
 
-Route: users.index
+Route: `users.index`
 
 ```shell script
 curl http://localhost:8080/api/users \
@@ -19,7 +19,7 @@ curl http://localhost:8080/api/users \
 
 ### Get
 
-Route: users.show
+Route: `users.show`
 
 ```shell script
 curl http://localhost:8080/api/users/1 \
@@ -28,7 +28,7 @@ curl http://localhost:8080/api/users/1 \
 
 ### Create
 
-Route: users.store
+Route: `users.store`
 
 ```shell script
 curl -X POST http://localhost:8080/api/users \
@@ -43,7 +43,7 @@ curl -X POST http://localhost:8080/api/users \
 
 ### Update
 
-Route: users.update
+Route: `users.update`
 
 ```shell script
 curl -X PUT http://localhost:8080/api/users/1 \
@@ -57,7 +57,7 @@ curl -X PUT http://localhost:8080/api/users/1 \
 
 ### Delete
 
-Route: users.destroy
+Route: `users.destroy`
 
 ```shell script
 curl -X DELETE http://localhost:8080/api/users/7 \
