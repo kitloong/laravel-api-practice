@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +20,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-// Route::apiResource('users', 'Api\UserController');
-Route::get('users', 'Api\UserController@index')->name('users.index');
-Route::post('users', 'Api\UserController@store')->name('users.store');
-Route::get('users/{user}', 'Api\UserController@show')->name('users.show');
-Route::put('users/{user}', 'Api\UserController@update')->name('users.update');
-Route::delete('users/{user}', 'Api\UserController@destroy')->name('users.destroy');
+//Route::apiResource('users', UserController::class);
+Route::middleware(['app-logger'])->group(function () {
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::post('users', [UserController::class, 'store'])->name('users.store');
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+});
