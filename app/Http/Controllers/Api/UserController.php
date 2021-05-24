@@ -5,16 +5,35 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserResourceCollection;
-use App\User;
+use App\Models\User;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Log;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers\Api
+ *
+ * @OA\Tag(
+ *     name="Users",
+ *     description="User API"
+ * )
+ */
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/users",
+     *     tags={"Users"},
+     *     summary="Get list of users",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(ref="#/components/schemas/UserResourceCollection"),
+     *     ),
+     *     @OA\Response(response=400, description="Bad request")
+     * )
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -25,10 +44,49 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/users",
+     *     tags={"Users"},
+     *     summary="Store a newly created user in storage",
+     *     @OA\RequestBody(
+     *         description="Input data",
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"name", "email", "password"},
+     *                 @OA\Property(
+     *                     property="name",
+     *                     description="Name to be created",
+     *                     maxLength=255,
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     description="Email to be created",
+     *                     maxLength=255,
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     description="Password to be created",
+     *                     minLength=8,
+     *                     type="string"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successful operation",
+     *         @OA\JsonContent(ref="#/components/schemas/UserResource"),
+     *     ),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=422, description="The given data was invalid"),
+     * )
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse|object
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -50,9 +108,28 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/users/{id}",
+     *     tags={"Users"},
+     *     summary="Get the specified user",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(ref="#/components/schemas/UserResource"),
+     *     ),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Page not found"),
+     * )
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(User $user)
@@ -61,11 +138,53 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/users/{id}",
+     *     tags={"Users"},
+     *     summary="Update the specified user in storage",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         description="Input data",
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"name", "email"},
+     *                 @OA\Property(
+     *                     property="name",
+     *                     description="Name to be updated",
+     *                     maxLength=255,
+     *                     type="string",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     description="Email to be updated",
+     *                     maxLength=255,
+     *                     type="string"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(ref="#/components/schemas/UserResource"),
+     *     ),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Page not found"),
+     *     @OA\Response(response=422, description="The given data was invalid"),
+     * )
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\JsonResponse|object
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, User $user)
     {
@@ -84,9 +203,27 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/users/{id}",
+     *     tags={"Users"},
+     *     summary="Remove the specified user from storage",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Successful operation",
+     *     ),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Page not found"),
+     * )
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */

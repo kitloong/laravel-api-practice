@@ -19,6 +19,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.7",
+        "darkaonline/l5-swagger": "^8.0",
         "facade/ignition": "^2.5",
         "friendsofphp/php-cs-fixer": "^3.0",
         "fzaninotto/faker": "^1.9.1",
@@ -55,6 +56,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "local-env-setup": [
+            "@php -r \"copy('.env.local', '.env');\""
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

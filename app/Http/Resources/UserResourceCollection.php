@@ -4,6 +4,17 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
+/**
+ * Class UserResourceCollection
+ * @package App\Http\Resources
+ *
+ * @OA\Schema(
+ *     description="User resource collection",
+ *     @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/User")),
+ *     @OA\Property(property="links", ref="#/components/schemas/ResourceLinks"),
+ *     @OA\Property(property="meta", ref="#/components/schemas/ResourceMeta"),
+ * )
+ */
 class UserResourceCollection extends ResourceCollection
 {
     /**

@@ -4,6 +4,15 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Class UserResource
+ * @package App\Http\Resources
+ *
+ * @OA\Schema(
+ *     description="User resource",
+ *     @OA\Property(property="data", ref="#/components/schemas/User"),
+ * )
+ */
 class UserResource extends JsonResource
 {
     /**
