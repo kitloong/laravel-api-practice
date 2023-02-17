@@ -15,9 +15,9 @@ use OpenApi\Annotations as OA;
  *     @OA\Property(property="id", type="integer", description="ID"),
  *     @OA\Property(property="name", type="string", description="Name"),
  *     @OA\Property(property="email", type="string", description="Email"),
- *     @OA\Property(property="email_verified_at", type="string", nullable="true", description="Account verified timestamp"),
- *     @OA\Property(property="created_at", type="string", nullable="true", description="Created timestamp"),
- *     @OA\Property(property="updated_at", type="string", nullable="true", description="Updated timestamp"),
+ *     @OA\Property(property="email_verified_at", type="string", nullable=true, description="Account verified timestamp"),
+ *     @OA\Property(property="created_at", type="string", nullable=true, description="Created timestamp"),
+ *     @OA\Property(property="updated_at", type="string", nullable=true, description="Updated timestamp"),
  * )
  */
 class User extends Authenticatable
