@@ -6,12 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use OpenApi\Annotations as OA;
 
 /**
- * Class User
- * @package App\Models
- *
  * @OA\Schema(
+ *     schema="User",
  *     description="User model",
  *     @OA\Property(property="id", type="integer", description="ID"),
  *     @OA\Property(property="name", type="string", description="Name"),

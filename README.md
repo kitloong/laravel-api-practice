@@ -5,29 +5,18 @@ https://medium.com/@kitloong/create-crud-rest-api-with-laravel-api-resource-3146
 ## Setup
 
 ```shell
-docker-compose build
-docker-compose up -d # Up on port 8080
-docker-compose exec app bash # Exec into app
+./vendor/bin/sail up -d # Up on port 8080
 
-composer install
-composer run local-env-setup # Setup .env for Docker
+./vendor/bin/sail composer install
 
-php artisan migrate
-php artisan db:seed
-
-exit
-
-# Test health check on host machine
-curl http://localhost:8080/api/health
-{"data":true} # Expected output
-
-echo Done!
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed
 ```
 
 ## Swagger
 
 ```shell
-php artisan l5-swagger:generate # Generate
+./vendor/bin/sail artisan l5-swagger:generate # Generate
 
 # Browse http://localhost:8080/api/documentation
 ```

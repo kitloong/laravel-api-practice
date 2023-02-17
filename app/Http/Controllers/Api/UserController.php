@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserResourceCollection;
 use App\Models\User;
-use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Log;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use OpenApi\Annotations as OA;
 
 /**
  * Class UserController
@@ -102,7 +103,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
-        Log::info("User ID {$user->id} created successfully.");
+        Log::info("User ID $user->id created successfully.");
 
         return (new UserResource($user))->response()->setStatusCode(Response::HTTP_CREATED);
     }
