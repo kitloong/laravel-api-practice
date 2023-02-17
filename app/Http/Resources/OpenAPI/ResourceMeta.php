@@ -5,30 +5,9 @@
  * Date: 2021/05/23
  */
 
-namespace App\Virtual;
+namespace App\Http\Resources\OpenAPI;
 
 use OpenApi\Annotations as OA;
-
-/**
- * Class ResourceCollection
- *
- * @package App\Virtual
- */
-class ResourceCollection
-{
-
-}
-
-/**
- * @OA\Schema(
- *     schema="ResourceLinks",
- *     @OA\Property(property="first", type="string", description="First page link"),
- *     @OA\Property(property="last", type="string", description="Last page link"),
- *     @OA\Property(property="prev", type="string", nullable=true, description="Previous page link"),
- *     @OA\Property(property="next", type="string", nullable=true, description="Next page link"),
- * )
- */
-class ResourceLinks {}
 
 /**
  * @OA\Schema(
@@ -44,13 +23,3 @@ class ResourceLinks {}
  * )
  */
 class ResourceMeta{}
-
-/**
- * @OA\Schema(
- *     schema="ResourceMetaLinks",
- *     @OA\Property(property="url", type="string", description="Page link"),
- *     @OA\Property(property="label", type="string", description="Page label"),
- *     @OA\Property(property="active", type="boolean", description="Current page flag"),
- * )
- */
-class ResourceMetaLinks{}
