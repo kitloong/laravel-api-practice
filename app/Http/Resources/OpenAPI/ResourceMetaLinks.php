@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: liow.kitloong
- * Date: 2021/05/23
- */
 
 namespace App\Http\Resources\OpenAPI;
 
