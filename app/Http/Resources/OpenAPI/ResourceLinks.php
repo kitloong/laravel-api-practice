@@ -2,15 +2,34 @@
 
 namespace App\Http\Resources\OpenAPI;
 
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 
-/**
- * @OA\Schema(
- *     schema="ResourceLinks",
- *     @OA\Property(property="first", type="string", description="First page link"),
- *     @OA\Property(property="last", type="string", description="Last page link"),
- *     @OA\Property(property="prev", type="string", nullable=true, description="Previous page link"),
- *     @OA\Property(property="next", type="string", nullable=true, description="Next page link"),
- * )
- */
-class ResourceLinks {}
+#[OA\Schema(
+    properties: [
+        new OA\Property(
+            property: "first",
+            description: "First page link",
+            type: "string"
+        ),
+        new OA\Property(
+            property: "last",
+            description: "Last page link",
+            type: "string"
+        ),
+        new OA\Property(
+            property: "prev",
+            description: "Previous page link",
+            type: "string",
+            nullable: true
+        ),
+        new OA\Property(
+            property: "next",
+            description: "Next page link",
+            type: "string",
+            nullable: true
+        ),
+    ]
+)]
+class ResourceLinks
+{
+}

@@ -2,14 +2,27 @@
 
 namespace App\Http\Resources\OpenAPI;
 
-use OpenApi\Annotations as OA;
+use OpenApi\Attributes as OA;
 
-/**
- * @OA\Schema(
- *     schema="ResourceMetaLinks",
- *     @OA\Property(property="url", type="string", description="Page link"),
- *     @OA\Property(property="label", type="string", description="Page label"),
- *     @OA\Property(property="active", type="boolean", description="Current page flag"),
- * )
- */
-class ResourceMetaLinks{}
+#[OA\Schema(
+    properties: [
+        new OA\Property(
+            property: "url",
+            description: "Page link",
+            type: "string"
+        ),
+        new OA\Property(
+            property: "label",
+            description: "Page label",
+            type: "string"
+        ),
+        new OA\Property(
+            property: "active",
+            description: "Current page flag",
+            type: "boolean"
+        ),
+    ]
+)]
+class ResourceMetaLinks
+{
+}
