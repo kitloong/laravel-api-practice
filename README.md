@@ -4,30 +4,44 @@ https://medium.com/@kitloong/create-crud-rest-api-with-laravel-api-resource-3146
 
 ## Setup
 
+This project uses [Sail](https://laravel.com/docs/sail).
+
+Please install [Docker](https://www.docker.com) in order to start using Sail.
+
+Install project dependencies:
+
+```shell
+composer install
+```
+
+Startup services:
+
 ```shell
 ./vendor/bin/sail up -d # Up on port 8080
+```
 
-./vendor/bin/sail composer install
+Check service status:
 
+```
+curl http://localhost:8080/api/health
+```
+
+Migrate and seed database:
+
+```shell
 ./vendor/bin/sail artisan migrate
 ./vendor/bin/sail artisan db:seed
 ```
 
-## Swagger
+### Swagger
+
+Generate swagger page
 
 ```shell
-./vendor/bin/sail artisan l5-swagger:generate # Generate
-
-# Browse http://localhost:8080/api/documentation
+./vendor/bin/sail artisan l5-swagger:generate
 ```
 
-## API Resource Routes
-
-https://laravel.com/docs/8.x/controllers#restful-partial-resource-routes
-
-## Eloquent: API Resources
-
-https://laravel.com/docs/8.x/eloquent-resources
+Open http://localhost:8080/api/documentation with your favourite browser to browse Swagger page.
 
 ## API example
 
