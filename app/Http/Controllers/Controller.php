@@ -14,7 +14,7 @@ use OpenApi\Attributes as OA;
     contact: new OA\Contact(email: "kitloong1008@gmail.com")
 )]
 #[OA\Server(
-    url: L5_SWAGGER_CONST_HOST,
+    url: "http://localhost:8080/api",
     description: "L5 Swagger OpenApi dynamic host server"
 )]
 class Controller extends BaseController
