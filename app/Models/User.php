@@ -5,47 +5,76 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use OpenApi\Attributes as OA;
 
-/**
- * Class User
- * @package App\Models
- *
- * @OA\Schema(
- *     description="User model",
- *     @OA\Property(property="id", type="integer", description="ID"),
- *     @OA\Property(property="name", type="string", description="Name"),
- *     @OA\Property(property="email", type="string", description="Email"),
- *     @OA\Property(property="email_verified_at", type="string", nullable="true", description="Account verified timestamp"),
- *     @OA\Property(property="created_at", type="string", nullable="true", description="Created timestamp"),
- *     @OA\Property(property="updated_at", type="string", nullable="true", description="Updated timestamp"),
- * )
- */
+#[OA\Schema(
+    description: 'User model',
+    properties: [
+        new OA\Property(
+            property: 'id',
+            description: 'ID',
+            type: 'integer'
+        ),
+        new OA\Property(
+            property: 'name',
+            description: 'Name',
+            type: 'string'
+        ),
+        new OA\Property(
+            property: 'email',
+            description: 'Email',
+            type: 'string'
+        ),
+        new OA\Property(
+            property: 'email_verified_at',
+            description: 'Account verified timestamp',
+            type: 'string',
+            nullable: true
+        ),
+        new OA\Property(
+            property: 'created_at',
+            description: 'Created timestamp',
+            type: 'string',
+            nullable: true
+        ),
+        new OA\Property(
+            property: 'updated_at',
+            description: 'Updated timestamp',
+            type: 'string',
+            nullable: true
+        ),
+    ]
+)]
 class User extends Authenticatable
 {
-    use Notifiable, HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
      * The attributes that should be hidden for arrays.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
      * The attributes that should be cast to native types.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',

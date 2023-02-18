@@ -4,41 +4,53 @@ https://medium.com/@kitloong/create-crud-rest-api-with-laravel-api-resource-3146
 
 ## Setup
 
-```shell
-docker-compose build
-docker-compose up -d # Up on port 8080
-docker-compose exec app bash # Exec into app
+This project uses [Sail](https://laravel.com/docs/sail).
 
+Please install [Docker](https://www.docker.com) in order to start using Sail.
+
+Install project dependencies:
+
+```shell
 composer install
-composer run local-env-setup # Setup .env for Docker
-
-php artisan migrate
-php artisan db:seed
-
-exit
-
-# Test health check on host machine
-curl http://localhost:8080/api/health
-{"data":true} # Expected output
-
-echo Done!
 ```
 
-## Swagger
+Setup env:
 
 ```shell
-php artisan l5-swagger:generate # Generate
-
-# Browse http://localhost:8080/api/documentation
+cp .env.example .env
+php artisan key:generate
 ```
 
-## API Resource Routes
+Startup services:
 
-https://laravel.com/docs/8.x/controllers#restful-partial-resource-routes
+```shell
+./vendor/bin/sail up -d # Up on port 8080
+```
 
-## Eloquent: API Resources
+PS: `.env` has been pre-configured to support MySQL and Redis from sail.
 
-https://laravel.com/docs/8.x/eloquent-resources
+Check service status:
+
+```
+curl http://localhost:8080/api/health
+```
+
+Migrate and seed database:
+
+```shell
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed
+```
+
+### Swagger
+
+Generate swagger page
+
+```shell
+./vendor/bin/sail artisan l5-swagger:generate
+```
+
+Open http://localhost:8080/api/documentation with your favourite browser to browse Swagger page.
 
 ## API example
 
