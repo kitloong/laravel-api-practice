@@ -14,11 +14,20 @@ Install project dependencies:
 composer install
 ```
 
+Setup env:
+
+```shell
+cp .env.example .env
+php artisan key:generate
+```
+
 Startup services:
 
 ```shell
 ./vendor/bin/sail up -d # Up on port 8080
 ```
+
+PS: `.env` has been pre-configured to support MySQL and Redis from sail.
 
 Check service status:
 
