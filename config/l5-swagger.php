@@ -100,12 +100,14 @@ return [
         'scanOptions' => [
             /**
              * analyser: defaults to \OpenApi\StaticAnalyser .
+             *
              * @see \OpenApi\scan
              */
             'analyser' => null,
 
             /**
              * analysis: defaults to a new \OpenApi\Analysis .
+             *
              * @see \OpenApi\scan
              */
             'analysis' => null,
@@ -122,6 +124,7 @@ return [
 
             /**
              * pattern: string       $pattern File pattern(s) to scan (default: *.php) .
+             *
              * @see \OpenApi\scan
              */
             'pattern' => null,
@@ -240,8 +243,8 @@ return [
         /*
          * Uncomment to add constants which can be used in annotations
          */
-         'constants' => [
+        'constants' => [
             'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
-         ],
+        ],
     ],
 ];

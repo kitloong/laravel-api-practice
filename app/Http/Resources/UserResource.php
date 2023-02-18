@@ -7,12 +7,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
-    description: "User resource",
+    description: 'User resource',
     properties: [
         new OA\Property(
-            property: "data",
-            ref: "#/components/schemas/User"
-        )
+            property: 'data',
+            ref: '#/components/schemas/User'
+        ),
     ]
 )]
 class UserResource extends JsonResource

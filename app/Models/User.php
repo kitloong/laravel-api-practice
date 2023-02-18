@@ -9,39 +9,39 @@ use Laravel\Sanctum\HasApiTokens;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
-    description: "User model",
+    description: 'User model',
     properties: [
         new OA\Property(
-            property: "id",
-            description: "ID",
-            type: "integer"
+            property: 'id',
+            description: 'ID',
+            type: 'integer'
         ),
         new OA\Property(
-            property: "name",
-            description: "Name",
-            type: "string"
+            property: 'name',
+            description: 'Name',
+            type: 'string'
         ),
         new OA\Property(
-            property: "email",
-            description: "Email",
-            type: "string"
+            property: 'email',
+            description: 'Email',
+            type: 'string'
         ),
         new OA\Property(
-            property: "email_verified_at",
-            description: "Account verified timestamp",
-            type: "string",
+            property: 'email_verified_at',
+            description: 'Account verified timestamp',
+            type: 'string',
             nullable: true
         ),
         new OA\Property(
-            property: "created_at",
-            description: "Created timestamp",
-            type: "string",
+            property: 'created_at',
+            description: 'Created timestamp',
+            type: 'string',
             nullable: true
         ),
         new OA\Property(
-            property: "updated_at",
-            description: "Updated timestamp",
-            type: "string",
+            property: 'updated_at',
+            description: 'Updated timestamp',
+            type: 'string',
             nullable: true
         ),
     ]

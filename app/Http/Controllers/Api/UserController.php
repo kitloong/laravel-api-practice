@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,90 +14,91 @@ use Illuminate\Support\Facades\Log;
 use OpenApi\Attributes as OA;
 
 #[OA\Tag(
-    name: "Users",
-    description: "User API"
+    name: 'Users',
+    description: 'User API'
 )]
 class UserController extends Controller
 {
     #[OA\Get(
-        path: "/users",
-        summary: "Display a listing of the users, with paginate.",
-        tags: ["Users"],
+        path: '/users',
+        summary: 'Display a listing of the users, with paginate.',
+        tags: ['Users'],
         responses: [
             new OA\Response(
                 response: 200,
-                description: "Successful operation",
-                content: new OA\JsonContent(ref: "#/components/schemas/UserCollection")
+                description: 'Successful operation',
+                content: new OA\JsonContent(ref: '#/components/schemas/UserCollection')
             ),
             new OA\Response(
                 response: 400,
-                description: "Bad request"
-            )
+                description: 'Bad request'
+            ),
         ]
     )]
     public function index(): JsonResponse
     {
         $users = User::paginate();
+
         return (new UserCollection($users))->response();
     }
 
     #[OA\Post(
-        path: "/users",
-        summary: "Store a newly created user in storage.",
+        path: '/users',
+        summary: 'Store a newly created user in storage.',
         requestBody: new OA\RequestBody(
-            description: "Input data",
+            description: 'Input data',
             content: [
                 new OA\MediaType(
-                    mediaType: "application/x-www-form-urlencoded",
+                    mediaType: 'application/x-www-form-urlencoded',
                     schema: new OA\Schema(
-                        required: ["name", "email", "password"],
+                        required: ['name', 'email', 'password'],
                         properties: [
                             new OA\Property(
-                                property: "name",
-                                description: "Name to be created",
-                                type: "string",
+                                property: 'name',
+                                description: 'Name to be created',
+                                type: 'string',
                                 maxLength: 255,
                             ),
                             new OA\Property(
-                                property: "email",
-                                description: "Email to be created",
-                                type: "string",
+                                property: 'email',
+                                description: 'Email to be created',
+                                type: 'string',
                                 maxLength: 255
                             ),
                             new OA\Property(
-                                property: "password",
-                                description: "Password to be created",
-                                type: "string",
+                                property: 'password',
+                                description: 'Password to be created',
+                                type: 'string',
                                 minLength: 8
-                            )
+                            ),
                         ],
-                        type: "object"
+                        type: 'object'
                     )
-                )
+                ),
             ]
         ),
-        tags: ["Users"],
+        tags: ['Users'],
         responses: [
             new OA\Response(
                 response: 201,
-                description: "Successful operation",
-                content: new OA\JsonContent(ref: "#/components/schemas/UserResource")
+                description: 'Successful operation',
+                content: new OA\JsonContent(ref: '#/components/schemas/UserResource')
             ),
-            new OA\Response(response: 400, description: "Bad request"),
-            new OA\Response(response: 422, description: "The given data was invalid"),
+            new OA\Response(response: 400, description: 'Bad request'),
+            new OA\Response(response: 422, description: 'The given data was invalid'),
         ]
     )]
     public function store(Request $request): JsonResponse
     {
         $request->validate([
-            'name'     => 'bail|required|string|max:255',
-            'email'    => 'bail|required|string|max:255|email|unique:users,email',
-            'password' => 'bail|required|string|min:8'
+            'name' => 'bail|required|string|max:255',
+            'email' => 'bail|required|string|max:255|email|unique:users,email',
+            'password' => 'bail|required|string|min:8',
         ]);
 
-        $user           = new User();
-        $user->name     = $request->input('name');
-        $user->email    = $request->input('email');
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
@@ -107,27 +108,27 @@ class UserController extends Controller
     }
 
     #[OA\Get(
-        path: "/users/{id}",
-        summary: "Display the specified user.",
-        tags: ["Users"],
+        path: '/users/{id}',
+        summary: 'Display the specified user.',
+        tags: ['Users'],
         parameters: [
             new OA\Parameter(
-                name: "id",
-                in: "path",
+                name: 'id',
+                in: 'path',
                 required: true,
                 schema: new OA\Schema(
-                    type: "integer"
+                    type: 'integer'
                 )
-            )
+            ),
         ],
         responses: [
             new OA\Response(
                 response: 200,
-                description: "Successful operation",
-                content: new OA\JsonContent(ref: "#/components/schemas/UserResource")
+                description: 'Successful operation',
+                content: new OA\JsonContent(ref: '#/components/schemas/UserResource')
             ),
-            new OA\Response(response: 400, description: "Bad request"),
-            new OA\Response(response: 404, description: "Page not found"),
+            new OA\Response(response: 400, description: 'Bad request'),
+            new OA\Response(response: 404, description: 'Page not found'),
         ]
     )]
     public function show(User $user): JsonResponse
@@ -136,62 +137,62 @@ class UserController extends Controller
     }
 
     #[OA\Put(
-        path: "/users/{id}",
-        summary: "Update the specified user in storage.",
+        path: '/users/{id}',
+        summary: 'Update the specified user in storage.',
         requestBody: new OA\RequestBody(
-            description: "Input data",
+            description: 'Input data',
             content: [
                 new OA\MediaType(
-                    mediaType: "application/x-www-form-urlencoded",
+                    mediaType: 'application/x-www-form-urlencoded',
                     schema: new OA\Schema(
-                        required: ["name", "email", "password"],
+                        required: ['name', 'email', 'password'],
                         properties: [
                             new OA\Property(
-                                property: "name",
-                                description: "Name to be created",
-                                type: "string",
+                                property: 'name',
+                                description: 'Name to be created',
+                                type: 'string',
                                 maxLength: 255,
                             ),
                             new OA\Property(
-                                property: "email",
-                                description: "Email to be created",
-                                type: "string",
+                                property: 'email',
+                                description: 'Email to be created',
+                                type: 'string',
                                 maxLength: 255
                             ),
                         ],
-                        type: "object"
+                        type: 'object'
                     )
-                )
+                ),
             ]
         ),
-        tags: ["Users"],
+        tags: ['Users'],
         parameters: [
             new OA\Parameter(
-                name: "id",
-                in: "path",
+                name: 'id',
+                in: 'path',
                 required: true,
-                schema: new OA\Schema(type: "integer")
-            )
+                schema: new OA\Schema(type: 'integer')
+            ),
         ],
         responses: [
             new OA\Response(
                 response: 200,
-                description: "Successful operation",
-                content: new OA\JsonContent(ref: "#/components/schemas/UserResource")
+                description: 'Successful operation',
+                content: new OA\JsonContent(ref: '#/components/schemas/UserResource')
             ),
-            new OA\Response(response: 400, description: "Bad request"),
-            new OA\Response(response: 404, description: "Page not found"),
-            new OA\Response(response: 422, description: "The given data was invalid"),
+            new OA\Response(response: 400, description: 'Bad request'),
+            new OA\Response(response: 404, description: 'Page not found'),
+            new OA\Response(response: 422, description: 'The given data was invalid'),
         ]
     )]
     public function update(Request $request, User $user): JsonResponse
     {
         $request->validate([
-            'name'  => 'bail|required|string|max:255',
-            'email' => 'bail|required|string|max:255|email|unique:users,email,' . $user->id
+            'name' => 'bail|required|string|max:255',
+            'email' => 'bail|required|string|max:255|email|unique:users,email,'.$user->id,
         ]);
 
-        $user->name  = $request->input('name');
+        $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->save();
 
@@ -201,24 +202,24 @@ class UserController extends Controller
     }
 
     #[OA\Delete(
-        path: "/users/{id}",
-        summary: "Remove the specified user from storage.",
-        tags: ["Users"],
+        path: '/users/{id}',
+        summary: 'Remove the specified user from storage.',
+        tags: ['Users'],
         parameters: [
             new OA\Parameter(
-                name: "id",
-                in: "path",
+                name: 'id',
+                in: 'path',
                 required: true,
-                schema: new OA\Schema(type: "integer")
-            )
+                schema: new OA\Schema(type: 'integer')
+            ),
         ],
         responses: [
             new OA\Response(
                 response: 204,
-                description: "Successful operation"
+                description: 'Successful operation'
             ),
-            new OA\Response(response: 400, description: "Bad request"),
-            new OA\Response(response: 404, description: "Page not found"),
+            new OA\Response(response: 400, description: 'Bad request'),
+            new OA\Response(response: 404, description: 'Page not found'),
         ]
     )]
     public function destroy(User $user): Response

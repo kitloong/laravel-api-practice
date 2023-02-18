@@ -23,7 +23,6 @@ Route::get('health', function () {
     return ['data' => true];
 });
 
-
 //Route::apiResource('users', UserController::class);
 Route::middleware(['app-logger'])->group(function () {
     Route::get('users', [UserController::class, 'index'])->name('users.index');

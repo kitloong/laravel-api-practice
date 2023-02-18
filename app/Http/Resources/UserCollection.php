@@ -7,21 +7,21 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(
-    description: "User resource collection",
+    description: 'User resource collection',
     properties: [
         new OA\Property(
-            property: "data",
-            type: "array",
-            items: new OA\Items(ref: "#/components/schemas/User")
+            property: 'data',
+            type: 'array',
+            items: new OA\Items(ref: '#/components/schemas/User')
         ),
         new OA\Property(
-            property: "links",
-            ref: "#/components/schemas/ResourceLinks"
+            property: 'links',
+            ref: '#/components/schemas/ResourceLinks'
         ),
         new OA\Property(
-            property: "meta",
-            ref: "#/components/schemas/ResourceMeta"
-        )
+            property: 'meta',
+            ref: '#/components/schemas/ResourceMeta'
+        ),
     ]
 )]
 class UserCollection extends ResourceCollection
